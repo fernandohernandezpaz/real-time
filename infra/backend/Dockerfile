@@ -1,6 +1,6 @@
-FROM node:16
+FROM node:18
 WORKDIR /app
-COPY ./backend .
+COPY ./src/backend .
 RUN yarn install
 RUN yarn build
 EXPOSE 3001

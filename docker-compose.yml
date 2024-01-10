@@ -1,25 +1,25 @@
 version: '3.9'
 services:
-  backend_nest_app:
-    container_name: backend_nest_app
-    image: backend_nest_app
+  backend_real_time_app:
+    container_name: backend_real_time_app
+    image: backend_real_time_img
     build:
       context: .
-      dockerfile: ../infra/backend/Dockerfile
+      dockerfile: ./infra/backend/Dockerfile
     volumes:
       - type: bind
-        source: ./backend
+        source: ./src/backend
         target: /app
     ports:
       - '3001:3001'
     environment:
       MONGODB_ADMINUSERNAME: root
       MONGODB_ADMINPASSWORD: example
-      MONGODB_URL: mongodb://root:example@mongo:27017/
+      MONGODB_URL: mongodb://root:example@db_real_time_app:27017/
     depends_on:
-      - db_mongo_app
-  db_mongo_app:
-    container_name: db_mongo_app
+      - db_real_time_app
+  db_real_time_app:
+    container_name: db_real_time_app
     image: mongo
     volumes:
       - type: volume
