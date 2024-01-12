@@ -30,5 +30,20 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
+  frontend_real_time_app:
+    container_name: frontend_real_time_app
+    image: frontend_real_time_img
+    build:
+      context: .
+      dockerfile: ./infra/frontend/Dockerfile
+    volumes:
+      - type: bind
+        source: ./src/frontend
+        target: /app
+    ports:
+      - '3000:3000'
+    depends_on:
+      - backend_real_time_app
+
 volumes:
   mongodata:
